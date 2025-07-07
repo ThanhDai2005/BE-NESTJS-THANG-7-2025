@@ -100,4 +100,5 @@ function isSymmetricArray(arr) {
   return true;
 }
 
-console.log(isSymmetricArray([2, 3, 8, 3, 2]));
+console.log(isSymmetricArray([1, 2, 3, 2, 1]));
+console.log(isSymmetricArray([1, 2, 3, 4, 5]));
