@@ -82,8 +82,9 @@ function BaiTapTypeScript() {
   class Library {
     private books: Book[] = [];
 
-    addBook(book: Book): void {
+    addBook(book: Book): Book {
       this.books.push(book);
+      return book;
     }
 
     removeBook(ISBN: string): void {
@@ -106,13 +107,9 @@ function BaiTapTypeScript() {
 
   const library = new Library();
 
-  const book1 = new Book(
-    "The Great Gatsby",
-    "F. Scott Fitzgerald",
-    "123456789"
-  );
-  const book2 = new Book("1984", "George Orwell", "987654321");
-  const book3 = new Book("To Kill a Mockingbird", "Harper Lee", "111111111");
+  const book1 = new Book("viet nam", "ho chi minh", "1951980");
+  const book2 = new Book("que huong", "chu tich", "987654321");
+  const book3 = new Book("sinh nhat", "thanh dai", "2272005");
 
   library.addBook(book1);
   library.addBook(book2);
@@ -120,11 +117,92 @@ function BaiTapTypeScript() {
 
   library.listBooks();
 
-  console.log("Tìm sách có từ 'great':", library.findBook("great"));
+  console.log("Tìm sách có từ 'sinh nhat':", library.findBook("sinh nhat"));
 
   library.removeBook("987654321");
 
   library.listBooks();
+
+  //   Bài Tập 4: Hình học
+  // Tạo lớp Shape (trừu tượng) với phương thức calculateArea().
+  // Tạo lớp Rectangle và Circle kế thừa từ Shape, triển khai calculateArea() tương ứng.
+  // Viết chương trình tính diện tích các hình và hiển thị kết quả.
+
+  abstract class Shape {
+    public abstract calculateArea(): number;
+  }
+
+  class Rectangle extends Shape {
+    private width: number;
+    private height: number;
+
+    constructor(width: number, height: number) {
+      super();
+      this.width = width;
+      this.height = height;
+    }
+
+    public calculateArea(): number {
+      return this.width * this.height;
+    }
+  }
+
+  class Circle extends Shape {
+    private radius: number;
+
+    constructor(radius: number) {
+      super();
+      this.radius = radius;
+    }
+
+    public calculateArea(): number {
+      return Math.PI * this.radius * this.radius;
+    }
+  }
+
+  const rectangle = new Rectangle(3, 3);
+
+  console.log(`rectangle: ${rectangle.calculateArea()}`);
+
+  const circle = new Circle(3);
+
+  console.log(`circle: ${circle.calculateArea()}`);
+
+  //   Bài Tập 5: Quản lý nhân viên
+  // Tạo lớp Employee với các thuộc tính: name, position, salary.
+  // Kế thừa lớp Employee thành các lớp Manager và Developer, thêm phương thức getDetails().
+  // Tạo danh sách nhân viên và in thông tin chi tiết.
+
+  class Employee {
+    protected name: string;
+    protected position: string;
+    protected salary: number;
+
+    constructor(name: string, position: string, salary: number) {
+      this.name = name;
+      this.position = position;
+      this.salary = salary;
+    }
+  }
+
+  class Manager extends Employee {
+    public getDetails(): string {
+      return `Quan ly: ${this.name} - Luong: ${this.salary}`;
+    }
+  }
+
+  class Developer extends Employee {
+    public getDetails(): string {
+      return `Lap trinh Vien: ${this.name} - Luong: ${this.salary}`;
+    }
+  }
+
+  const employee: Employee[] = [
+    new Manager("Nguyen Van A", "Manager", 3000),
+    new Developer("Nguyen Van B", "Developer", 2000),
+  ];
+
+  employee.map((item) => console.log((item as any).getDetails()));
 
   return <></>;
 }
